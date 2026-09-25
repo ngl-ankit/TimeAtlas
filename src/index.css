@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html {
+    @apply bg-void text-ink font-body antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply min-h-screen overflow-x-hidden;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    @apply bg-cyan-glow/30 text-white;
+  }
+  *:focus-visible {
+    outline: 2px solid rgba(34, 211, 238, 0.8);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-edgebright/60 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-edgebright;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-panel/70 backdrop-blur-md border border-white/[0.07];
+  }
+  .glass-strong {
+    @apply bg-panel/90 backdrop-blur-xl border border-white/10;
+  }
+  .font-display {
+    letter-spacing: -0.02em;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-glow via-violet-glow to-magenta-glow;
+  }
+  .node-ring {
+    box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.5), 0 0 18px rgba(34, 211, 238, 0.35);
+  }
+  .skeleton {
+    @apply rounded-md bg-gradient-to-r from-surface via-edge/40 to-surface bg-[length:500px_100%] animate-shimmer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+[data-motion='off'] *,
+[data-motion='off'] *::before,
+[data-motion='off'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
