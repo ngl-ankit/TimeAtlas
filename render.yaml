@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: timeatlas
+    runtime: static
+    branch: main
+    buildCommand: corepack enable && pnpm install --frozen-lockfile --filter @workspace/time-atlas... && PORT=5173 BASE_PATH=/ pnpm --filter @workspace/time-atlas run build
+    staticPublishPath: artifacts/time-atlas/dist/public
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
